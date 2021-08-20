@@ -1,6 +1,11 @@
 YoTest-Web-SDK 文档
 ----
 
+* (兼容性)[https://github.com/YoTest-team/YoTest-Web-SDK#1-%E5%85%BC%E5%AE%B9%E6%80%A7]
+* (安装)[https://github.com/YoTest-team/YoTest-Web-SDK#2-%E5%AE%89%E8%A3%85]
+* (快速开始)[https://github.com/YoTest-team/YoTest-Web-SDK#3-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B]
+* (API)[https://github.com/YoTest-team/YoTest-Web-SDK#4-api]
+
 ### 1. 兼容性
 * IE9+
 * Chrome 4+
@@ -22,6 +27,20 @@ YoTest-Web-SDK 文档
 ```
 ### 3. 快速开始
 
+当你使用npm进行安装后，你可以通过import直接引入
+
+```javascript
+import initYoTest from "yotest-web-sdk";
+
+initYoTest({}, (captcha)=>{
+  if(captcha != null){
+    captcha.appendTo("#captcha");
+  }
+});
+```
+
+如果你是通过CDN路径引入，那么你也可以轻松的使用此SDK
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -29,11 +48,6 @@ YoTest-Web-SDK 文档
     <meta charset="UTF-8" />
     <title>YoTest Web SDK Demo</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-      }
-
       html,
       body {
         width: 100%;
