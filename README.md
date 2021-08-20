@@ -69,27 +69,27 @@ YoTest-Web-SDK文档
 
 初始化函数
 
-* [initYoTest](https://github.com/YoTest-team/YoTest-Web-SDK#inityotestoption-callback)
+* [initYoTest(option, callback)](https://github.com/YoTest-team/YoTest-Web-SDK#inityotestoption-callback)
 
 Captcha实例方法
 
-* [appendTo](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeappendto)
+* [appendTo(selector)](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeappendto)
 
-* [getValidate](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypegetvalidate)
+* [getValidate()](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypegetvalidate)
 
-* [reset](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypereset)
+* [reset()](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypereset)
 
-* [verify](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeverify)
+* [verify()](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeverify)
 
-* [onReady](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeonreadycallback)
+* [onReady(callback)](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeonreadycallback)
 
-* [onSuccess](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeonsuccesscallback)
+* [onSuccess(callback)](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeonsuccesscallback)
 
-* [onError](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeonerrorcallback)
+* [onError(callback)](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeonerrorcallback)
 
-* [onClose](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeonclosecallback)
+* [onClose(callback)](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeonclosecallback)
 
-* [destroy](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypedestroycallback)
+* [destroy()](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypedestroycallback)
 
 #### initYoTest(option, callback)
   - `option` \<Object\>
@@ -109,14 +109,14 @@ initYoTest({
   product: "custom",
   area: "#container",
   bgColor: "#ff0000",
-}, function(captcha){
+}, function(captcha) {
   if(captcha != null){
     captcha.appendTo("#captcha");
   }
 });
 ```
 
-#### Captcha.prototype.appendTo()
+#### Captcha.prototype.appendTo(selector)
 
 #### Captcha.prototype.getValidate()
 
