@@ -67,14 +67,38 @@ YoTest-Web-SDK文档
 
 ### 4. API
 
+初始化函数
+
+* [initYoTest](https://github.com/YoTest-team/YoTest-Web-SDK#inityotestoption-callback)
+
+Captcha实例方法
+
+* [appendTo](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeappendto)
+
+* [getValidate](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypegetvalidate)
+
+* [reset](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypereset)
+
+* [verify](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeverify)
+
+* [onReady](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeonreadycallback)
+
+* [onSuccess](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeonsuccesscallback)
+
+* [onError](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeonerrorcallback)
+
+* [onClose](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeonclosecallback)
+
+* [destroy](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypedestroycallback)
+
 #### initYoTest(option, callback)
-  - option \<Object\>
-    - accessId \<String\> 当前项目所属的accessId，可以在优验后台中进行相关获取及查看
-    - product \<String\> 默认值float，设置验证码的展现形式，其值包括浮动式（float）、弹出式（popup）、绑定式（bind）、自定义式（custom）四种，具体形式可自行通过 [在线体验]() 页面进行选择。需要注意的是，移动端由于屏幕展现原因，是无法展现浮动式（float）的
-    - area \<String\> 仅当 product: "custom" 生效，其作用为设置验证区域。需要注意的是，请确保对应的DOM元素存在，且符合CSS Selector的规范（例如：#id、.class、tagName及其组合均为合法）
-    - bgColor \<String\> 仅当 product: "custom" 生效，其设置对应验证区域的背景，支持HEX、RGB及RGBA的颜色格式
-  - callback: \<Function\>
-    - captcha: \<Captcha\> 加载成功且初始化完成则返回 Captcha 实例，其具有的方法请参考下方文档说明，若加载失败，其返回为 null，请做好错误处理
+  - `option` \<Object\>
+    - **accessId** \<String\> 当前项目所属的accessId，可以在优验后台中进行相关获取及查看
+    - **product** \<String\> 默认值float，设置验证码的展现形式，其值包括浮动式（float）、弹出式（popup）、绑定式（bind）、自定义式（custom）四种，具体形式可自行通过 [在线体验]() 页面进行选择。需要注意的是，移动端由于屏幕展现原因，是无法展现浮动式（float）的
+    - **area** \<String\> 仅当 product: "custom" 生效，其作用为设置验证区域。需要注意的是，请确保对应的DOM元素存在，且符合CSS Selector的规范（例如：#id、.class、tagName及其组合均为合法）
+    - **bgColor** \<String\> 仅当 product: "custom" 生效，其设置对应验证区域的背景，支持HEX、RGB及RGBA的颜色格式
+  - `callback` \<Function\>
+    - **captcha**: \<Captcha\> 加载成功且初始化完成则返回 Captcha 实例，其具有的方法请参考下方文档说明，若加载失败，其返回为 null，请做好错误处理
   - `return:` undefined
 
 初始化 `YoTest` ，传入相关的 `option` 参数，在 `callback` 中将会得到 `YoTest` 的对应实例。
