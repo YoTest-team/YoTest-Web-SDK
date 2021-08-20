@@ -44,7 +44,7 @@ function loadScript(src, callback) {
   document.body.appendChild(script);
 }
 
-module.export = ({ accessId, platform = "web", product = "float", area, bgColor }, callback) => {
+module.exports = ({ accessId, platform = "web", product = "float", area, bgColor }, callback) => {
   getInitData((error, response) => {
     if (error == null) {
       const { code, data } = response;
