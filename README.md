@@ -1,10 +1,10 @@
 YoTest-Web-SDK 文档
 ----
 
-* (兼容性)[https://github.com/YoTest-team/YoTest-Web-SDK#1-%E5%85%BC%E5%AE%B9%E6%80%A7]
-* (安装)[https://github.com/YoTest-team/YoTest-Web-SDK#2-%E5%AE%89%E8%A3%85]
-* (快速开始)[https://github.com/YoTest-team/YoTest-Web-SDK#3-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B]
-* (API)[https://github.com/YoTest-team/YoTest-Web-SDK#4-api]
+* [兼容性](https://github.com/YoTest-team/YoTest-Web-SDK#1-%E5%85%BC%E5%AE%B9%E6%80%A7)
+* [安装](https://github.com/YoTest-team/YoTest-Web-SDK#2-%E5%AE%89%E8%A3%85)
+* [快速开始](https://github.com/YoTest-team/YoTest-Web-SDK#3-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)
+* [API](https://github.com/YoTest-team/YoTest-Web-SDK#4-api)
 
 ### 1. 兼容性
 * IE9+
