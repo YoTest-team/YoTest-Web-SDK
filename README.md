@@ -1,5 +1,7 @@
 YoTest-Web-SDK 文档
 ----
+<a href="https://www.npmjs.com/package/yotest-web-sdk"><img src="https://img.shields.io/npm/v/yotest-web-sdk.svg?sanitize=true" alt="Version"></a>
+
 
 * [兼容性](https://github.com/YoTest-team/YoTest-Web-SDK#1-%E5%85%BC%E5%AE%B9%E6%80%A7)
 * [安装](https://github.com/YoTest-team/YoTest-Web-SDK#2-%E5%AE%89%E8%A3%85)
