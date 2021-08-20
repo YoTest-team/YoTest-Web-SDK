@@ -34,7 +34,9 @@ YoTest-Web-SDK 文档
 ```javascript
 import initYoTest from "yotest-web-sdk";
 
-initYoTest({}, (captcha)=>{
+initYoTest({
+  accessId: "当前项目所属的accessId，可以在后台中进行获取及查看",
+}, (captcha)=>{
   if(captcha != null){
     captcha.appendTo("#captcha");
   }
