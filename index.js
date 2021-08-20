@@ -67,10 +67,3 @@ module.export = ({ accessId, platform = "web", product = "float", area, bgColor 
     }
   })
 };
-
-module.export({
-  accessId: "4297f44b13955235245b2497399d7a93",
-  product: "float",
-}, (captcha) => {
-  captcha.appendTo("#captcha");
-});
