@@ -8,7 +8,7 @@ YoTest-Web-SDK 文档
 * [快速开始](https://github.com/YoTest-team/YoTest-Web-SDK#3-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)
 * [API](https://github.com/YoTest-team/YoTest-Web-SDK#4-api)
 
-### 1. 兼容性
+### 兼容性
 * IE9+
 * Chrome 4+
 * Safari 4+
@@ -18,7 +18,7 @@ YoTest-Web-SDK 文档
 * iOS Safari 3.2+
 * iOS WebView 3.2+
 
-### 2. 安装
+### 安装
 
 > npm install yotest-web-sdk --save
 
@@ -27,7 +27,7 @@ YoTest-Web-SDK 文档
 ```html
 <script src="https://cdn.jsdelivr.net/npm/yotest-web-sdk@1.0.0/dist/index.js"></script>
 ```
-### 3. 快速开始
+### 快速开始
 
 当你使用npm进行安装后，你可以通过import直接引入
 
@@ -83,7 +83,7 @@ initYoTest({}, (captcha)=>{
 </html>
 ```
 
-### 4. API
+### API
 
 初始化函数
 
