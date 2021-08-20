@@ -1,0 +1,19 @@
+{
+  "name": "yotest-web-sdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "parcel build --no-source-maps --global initYoTest index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YoTest-team/YoTest-Web-SDK.git"
+  },
+  "author": "yotest-team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YoTest-team/YoTest-Web-SDK/issues"
+  },
+  "homepage": "https://github.com/YoTest-team/YoTest-Web-SDK#readme"
+}
