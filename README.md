@@ -6,6 +6,7 @@ YoTest-Web-SDK 文档
 * [兼容性](https://github.com/YoTest-team/YoTest-Web-SDK#1-%E5%85%BC%E5%AE%B9%E6%80%A7)
 * [安装](https://github.com/YoTest-team/YoTest-Web-SDK#2-%E5%AE%89%E8%A3%85)
 * [快速开始](https://github.com/YoTest-team/YoTest-Web-SDK#3-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)
+* [验证模式]()
 * [API](https://github.com/YoTest-team/YoTest-Web-SDK#4-api)
 
 ### 兼容性
@@ -83,6 +84,73 @@ initYoTest({
     </script>
   </body>
 </html>
+```
+
+### 验证模式
+
+* 浮动式，默认PC展现形式，移动端不支持此模式，展示为弹窗式，设置 product: "float" 时生效
+
+![float](./images/float.gif)
+
+```javascript
+initYoTest({
+  accessId: "your accessId",
+  product: "float",
+}, (captcha) => {
+  if(captcha) {
+    captcha.appendTo("#captcha");
+  }
+});
+```
+
+* 弹窗式，设置 product: "popup" 时生效
+
+![float](./images/popup.gif)
+
+```javascript
+initYoTest({
+  accessId: "your accessId",
+  product: "popup",
+}, (captcha) => {
+  if(captcha) {
+    captcha.appendTo("#captcha");
+  }
+});
+```
+
+* 隐藏式，设置 product: "bind" 时生效，同时需要在onReady之后自行调用 [verify](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeverify) 方法进行展现
+
+![float](./images/bind.gif)
+
+```javascript
+initYoTest({
+  accessId: "your accessId",
+  product: "float",
+}, (captcha) => {
+  if(captcha) {
+    captcha.onReady(() => {
+      // 你也可以绑定事件，但需要注意：
+      // 一定要在onReady之后进行verify的调用
+      captcha.verify();
+    });
+  }
+});
+```
+
+* 自定义式，设置 product: "custom" 时生效，同时需要设置 [area](https://github.com/YoTest-team/YoTest-Web-SDK#inityotestoption-callback) 参数
+
+![float](./images/custom.gif)
+
+```javascript
+initYoTest({
+  accessId: "your accessId",
+  product: "custom",
+  area: "#form"
+}, (captcha) => {
+  if(captcha) {
+    captcha.appendTo("#captcha");
+  }
+});
 ```
 
 ### API
