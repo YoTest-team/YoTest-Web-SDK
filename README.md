@@ -2,6 +2,7 @@ YoTest-Web-SDK 文档
 ----
 <a href="https://www.npmjs.com/package/yotest-web-sdk"><img src="https://img.shields.io/npm/v/yotest-web-sdk.svg?sanitize=true" alt="Version"></a>
 
+> 基于设备特征识别和操作行为识别的新一代智能验证码，具备智能评分、抗Headless、模拟伪装、针对恶意设备自动提升验证难度等多项安全措施，帮助开发者减少恶意攻击导致的数字资产损失，强力护航业务安全。
 
 * [兼容性](https://github.com/YoTest-team/YoTest-Web-SDK#%E5%85%BC%E5%AE%B9%E6%80%A7)
 * [安装](https://github.com/YoTest-team/YoTest-Web-SDK#%E5%AE%89%E8%A3%85)
@@ -92,65 +93,79 @@ initYoTest({
 
 ![float](./images/float.gif)
 
-```javascript
-initYoTest({
-  accessId: "your accessId",
-  product: "float",
-}, (captcha) => {
-  if(captcha) {
-    captcha.appendTo("#captcha");
-  }
-});
+```html
+<div id="captcha"></div>
+...
+<script>
+  initYoTest({
+    accessId: "your accessId",
+    product: "float",
+  }, (captcha) => {
+    if(captcha) {
+      captcha.appendTo("#captcha");
+    }
+  });
+</script>
 ```
 
 * 弹窗式，设置 product: "popup" 时生效
 
 ![float](./images/popup.gif)
 
-```javascript
-initYoTest({
-  accessId: "your accessId",
-  product: "popup",
-}, (captcha) => {
-  if(captcha) {
-    captcha.appendTo("#captcha");
-  }
-});
+```html
+<div id="captcha"></div>
+...
+<script>
+  initYoTest({
+    accessId: "your accessId",
+    product: "popup",
+  }, (captcha) => {
+    if(captcha) {
+      captcha.appendTo("#captcha");
+    }
+  });
+</script>
 ```
 
 * 隐藏式，设置 product: "bind" 时生效，同时需要在onReady之后自行调用 [verify](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeverify) 方法进行展现
 
 ![float](./images/bind.gif)
 
-```javascript
-initYoTest({
-  accessId: "your accessId",
-  product: "float",
-}, (captcha) => {
-  if(captcha) {
-    captcha.onReady(() => {
-      // 你也可以绑定事件，但需要注意：
-      // 一定要在onReady之后进行verify的调用
-      captcha.verify();
-    });
-  }
-});
+```html
+<script>
+  initYoTest({
+    accessId: "your accessId",
+    product: "float",
+  }, (captcha) => {
+    if(captcha) {
+      captcha.onReady(() => {
+        // 你也可以绑定事件，但需要注意：
+        // 一定要在onReady之后进行verify的调用
+        captcha.verify();
+      });
+    }
+  });
+</script>
 ```
 
 * 自定义式，设置 product: "custom" 时生效，同时需要设置 [area](https://github.com/YoTest-team/YoTest-Web-SDK#inityotestoption-callback) 参数
 
 ![float](./images/custom.gif)
 
-```javascript
-initYoTest({
-  accessId: "your accessId",
-  product: "custom",
-  area: "#form"
-}, (captcha) => {
-  if(captcha) {
-    captcha.appendTo("#captcha");
-  }
-});
+```html
+<div id="captcha"></div>
+...
+<script>
+  initYoTest({
+    accessId: "your accessId",
+    product: "custom",
+    area: "#form"
+  }, (captcha) => {
+    if(captcha) {
+      captcha.appendTo("#captcha");
+    }
+  });
+</script>
 ```
 
 ### API
@@ -204,21 +219,168 @@ initYoTest({
   }
 });
 ```
-
 #### Captcha.prototype.appendTo(selector)
+- selector \<String\> 符合 CSS Selector的选择器及其组合（例如：#id、.class等）
+- `return`: this
+
+用于将 Captcha 实例添加到页面之中，使其展现默认的优验按钮样式。
+
+```html
+<div id="captcha"></div>
+...
+<script>
+  initYoTest({
+    accessId: "your accessId"
+  }, (captcha) => {
+    if(captcha){
+      captcha.appendTo("#captcha");
+    }
+  });
+</script>
+```
 
 #### Captcha.prototype.getValidate()
 
+- `return`: \<Object\>
+  - token \<String\> 当前验证的凭证，需要提交给后端来进行是否通过判断
+  - verified \<Boolean\> 是否验证成功
+
+获取当前验证结果。
+
+```html
+<div id="captcha"></div>
+...
+<script>
+  initYoTest({
+    accessId: "your accessId",
+  }, (captcha) => {
+    if(!captcha){
+      return;
+    }
+
+    captcha.appendTo("#captcha");
+    captcha.onClose(()=>{
+      const { token, verified } = captcha.getValidate();
+      if(verified) {
+        // 通过fetch方法将token传给后端相应接口进行判断
+        fetch("...?token=" + token);
+      }
+    });
+  });
+</script>
+```
+
 #### Captcha.prototype.reset()
+- `return`: this
+
+重置 Captcha 当前状态为初始化状态。
+
+```html
+<div id="captcha"></div>
+<button id="reset">重置<button>
+...
+
+<script>
+  initYoTest({
+    accessId: "your accessId",
+  }, (captcha) => {
+    if(!captcha) {
+      return;
+    }
+
+    captcha.appendTo("#captcha");
+    captcha.onReady(() => {
+      const $button = document.querySelector("#reset");
+      $button.addEventListener("click", () => {
+        captcha.reset();
+      });
+    });
+  });
+</script>
+
+```
 
 #### Captcha.prototype.verify()
+- `return`: this
+
+当 product: "bind" 是，调用此API可以呼出验证界面并要求验证。这种方式提供了更好的灵活性，方便开发者在不破坏原由功能和UI的情况下进行集成。但需要注意的是，请在onReady后进行调用，同时 verify 不需要和 appendTo 方法一同使用。
+
+```html
+<button id="checkcode">获取验证码</button>
+...
+<script>
+  initYoTest({
+    accessId: "your accessId",
+  }, (captcha) => {
+    if(!captcha) {
+      return;
+    }
+
+    captcha.onReady(() => {
+      const $checkcode = document.querySelector("#checkcode");
+      $checkcode.addEventListener("click", () => {
+        captcha.verify();
+      });
+    });
+  });
+</script>
+```
 
 #### Captcha.prototype.onReady(callback)
+- callback \<Function\> 初始化成功的回调函数，无参数
+- `return`: this
+
+监听验证的初始化完成事件。
+
+```html
+<div id="captcha"></div>
+...
+<script>
+  initYoTest({
+    accessId: "your accessId",
+  }, (captcha) => {
+    if(!captcha) {
+      return;
+    }
+
+    captcha.appendTo("#captcha");
+    captcha.onReady(()=>{
+      console.log("yotest init completed...");
+    });
+  });
+</script>
+```
 
 #### Captcha.prototype.onSuccess(callback)
+- callback \<Function\>
+  - data \<Object\> 验证成功的相关数据
+    - token \<String\> 当前验证的凭证，需要提交给后端来进行是否通过判断
+    - verified \<Boolean\> 是否验证成功
+- `return` this
+
+验证成功的监听回调。
+
+```html
+<div id="captcha"></div>
+...
+<script>
+  initYoTest({
+    accessId: "your accessId",
+  }, (captcha) => {
+    if(!captcha) {
+      return;
+    }
+
+    captcha.appendTo("#captcha");
+    captcha.onSuccess(({ token, verified }) => {
+      console.log(token, verified);
+    });
+  });
+</script>
+```
 
 #### Captcha.prototype.onError(callback)
 
 #### Captcha.prototype.onClose(callback)
 
-#### Captcha.prototype.destroy(callback)
+#### Captcha.prototype.destroy()
