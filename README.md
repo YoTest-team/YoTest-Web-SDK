@@ -1,17 +1,20 @@
 YoTest-Web-SDK 文档
 ----
 <a href="https://www.npmjs.com/package/yotest-web-sdk"><img src="https://img.shields.io/npm/v/yotest-web-sdk.svg?sanitize=true" alt="Version"></a>
-<a href="https://gitee.com/yo-test-team/yo-test-web-sdk"><img src="./images/gitee2.png" width="22px"/></a>
-<a href="https://github.com/YoTest-team/YoTest-Web-SDK"><img src="./images/GitHub.png" width="24px"/></a>
 
 > 基于设备特征识别和操作行为识别的新一代智能验证码，具备智能评分、抗Headless、模拟伪装、针对恶意设备自动提升验证难度等多项安全措施，帮助开发者减少恶意攻击导致的数字资产损失，强力护航业务安全。
 
-
+* [仓库入口](https://github.com/YoTest-team/YoTest-Web-SDK#%E4%BB%93%E5%BA%93%E5%85%A5%E5%8F%A3)
 * [兼容性](https://github.com/YoTest-team/YoTest-Web-SDK#%E5%85%BC%E5%AE%B9%E6%80%A7)
 * [安装](https://github.com/YoTest-team/YoTest-Web-SDK#%E5%AE%89%E8%A3%85)
 * [快速开始](https://github.com/YoTest-team/YoTest-Web-SDK#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)
 * [验证模式](https://github.com/YoTest-team/YoTest-Web-SDK#%E9%AA%8C%E8%AF%81%E6%A8%A1%E5%BC%8F)
 * [API](https://github.com/YoTest-team/YoTest-Web-SDK#api)
+
+
+### 仓库入口：
+<a href="https://gitee.com/yo-test-team/yo-test-web-sdk"><img src="./images/gitee2.png" width="30px"/></a>&nbsp;&nbsp;
+<a href="https://github.com/YoTest-team/YoTest-Web-SDK"><img src="./images/GitHub.png" width="32px"/></a>
 
 ### 兼容性
 * IE9+
