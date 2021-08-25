@@ -17,15 +17,15 @@ YoTest-Web-SDK 文档
 <a href="https://github.com/YoTest-team/YoTest-Web-SDK"><img src="./images/GitHub.png" width="32px"/></a>
 
 ### 兼容性
+> 以下兼容性根据[BrowserStack](https://live.browserstack.com/)的相关真机测试得出，仅供参考（其余不在测试中的浏览器或者版本也可能无障碍运行）。
+
 * IE9+
 * Edge 15+
 * Chrome 27+
-* Safari 4+
+* Safari 7.1+
 * Firefox 26+
 * Android 4.4+
 * iOS Safari 9+
-
-以上兼容性根据[BrowserStack](https://live.browserstack.com/)的相关真机测试得出，仅供参考（其余不在测试中的浏览器或者版本也可能无障碍运行，在此不进行说明）。
 
 ### 安装
 
@@ -387,7 +387,6 @@ initYoTest({
 ```
 
 #### Captcha.prototype.onError(callback)
-- 
 
 #### Captcha.prototype.onClose(callback)
 
