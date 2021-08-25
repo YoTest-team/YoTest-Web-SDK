@@ -18,13 +18,14 @@ YoTest-Web-SDK 文档
 
 ### 兼容性
 * IE9+
-* Chrome 4+
+* Edge 15+
+* Chrome 27+
 * Safari 4+
-* Firefox 3.6+
-* Edge 12+
-* Android 3+
-* iOS Safari 3.2+
-* iOS WebView 3.2+
+* Firefox 26+
+* Android 4.4+
+* iOS Safari 9+
+
+以上兼容性根据[BrowserStack](https://live.browserstack.com/)的相关真机测试得出，仅供参考（其余不在测试中的浏览器或者版本也可能无障碍运行，在此不进行说明）。
 
 ### 安装
 
