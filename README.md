@@ -17,7 +17,7 @@ YoTest-Web-SDK 文档
 <a href="https://github.com/YoTest-team/YoTest-Web-SDK"><img src="./images/GitHub.png" width="32px"/></a>
 
 ### 兼容性
-> 以下兼容性根据[BrowserStack](https://live.browserstack.com/)的相关真机测试得出，仅供参考（其余不在测试中的浏览器或者版本也可能无障碍运行）。
+> 以下兼容性根据[BrowserStack](https://live.browserstack.com/)的相关真机测试得出，仅供参考
 
 * IE9+
 * Edge 15+
