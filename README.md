@@ -22,10 +22,10 @@ YoTest-Web-SDK 文档
 * IE9+
 * Edge 15+
 * Chrome 27+
-* Safari 7.1+
+* Safari 6+
 * Firefox 26+
 * Android 4.4+
-* iOS Safari 9+
+* iOS Safari 7+
 
 ### 安装
 
@@ -363,7 +363,7 @@ initYoTest({
   - data \<Object\> 验证成功的相关数据
     - token \<String\> 当前验证的凭证，需要提交给后端来进行是否通过判断
     - verified \<Boolean\> 是否验证成功
-- `return` this
+- `return`: this
 
 验证成功的监听回调。
 
@@ -387,7 +387,78 @@ initYoTest({
 ```
 
 #### Captcha.prototype.onError(callback)
+- callback \<Function\>
+  - data \<Object\> 验证错误相关数据
+    - code \<Number\> 错误码
+    - message \<String\> 错误相关信息
+- `return`: this
+
+验证错误的监听回调。
+
+```html
+<div id="captcha"></div>
+...
+<script>
+  initYoTest({
+    accessId: "your accessId",
+  }, (captcha) => {
+    if(!captcha) {
+      return;
+    }
+
+    captcha.appendTo("#captcha");
+    captcha.onError(({ code, message }) => {
+      console.log(code, message);
+    });
+  });
+</script>
+```
 
 #### Captcha.prototype.onClose(callback)
+- callback \<Function\>
+- `return`: this
+
+验证关闭的监听回调。
+
+```html
+<div id="captcha"></div>
+...
+<script>
+  initYoTest({
+    accessId: "your accessId",
+  }, (captcha) => {
+    if(!captcha) {
+      return;
+    }
+
+    captcha.appendTo("#captcha");
+    captcha.onClose(() => {
+      console.log("captcha close");
+    });
+  });
+</script>
+```
 
 #### Captcha.prototype.destroy()
+- `return`: null
+
+销毁当前验证实例。
+
+```html
+<div id="captcha"></div>
+...
+<script>
+  initYoTest({
+    accessId: "your accessId",
+  }, (captcha) => {
+    if(!captcha) {
+      return;
+    }
+
+    captcha.appendTo("#captcha");
+    captcha.onSuccess(() => {
+      captcha.destroy();
+    });
+  });
+</script>
+```
