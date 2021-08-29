@@ -1,7 +1,7 @@
 {
   "name": "yotest-web-sdk",
   "version": "1.0.4",
-  "description": "",
+  "description": "YoTest Web SDK",
   "main": "dist/index.js",
   "scripts": {
     "build": "parcel build --no-source-maps --global initYoTest index.js"
