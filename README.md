@@ -204,7 +204,7 @@ Captcha实例方法
 #### initYoTest(option, callback)
   - `option` \<Object\>
     - **accessId** \<String\> 必填，当前项目所属的accessId，可以在优验后台中进行相关获取及查看
-    - **product** \<String\> 可选，默认值float，设置验证码的展现形式，其值包括浮动式（float）、弹出式（popup）、绑定式（bind）、自定义式（custom）四种，具体形式可自行通过 [在线体验]() 页面进行选择。需要注意的是，移动端由于屏幕展现原因，是无法展现浮动式（float）的
+    - **product** \<String\> 可选，默认值float，设置验证码的展现形式，其值包括浮动式（float）、弹出式（popup）、绑定式（bind）、自定义式（custom）四种，具体形式可通过 [验证模式](https://github.com/YoTest-team/YoTest-Web-SDK#%E9%AA%8C%E8%AF%81%E6%A8%A1%E5%BC%8F) 进行选择。需要注意的是，移动端由于屏幕展现原因，是无法展现浮动式（float）的
     - **area** \<String\> 可选，仅当 product: "custom" 生效，其作用为设置验证区域。需要注意的是，请确保对应的DOM元素存在，且符合CSS Selector的规范（例如：#id、.class、tagName及其组合均为合法）
     - **bgColor** \<String\> 可选，仅当 product: "custom" 生效，其设置对应验证区域的背景，支持HEX、RGB及RGBA的颜色格式
     - **enforced** \<Boolean\> 可选，默认值false，强制每一次都进行验证，取消无感验证
