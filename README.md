@@ -117,7 +117,7 @@ initYoTest({
 
 * 弹窗式，设置 product: "popup" 时生效
 
-![float](./images/popup.gif)
+![popup](./images/popup.gif)
 
 ```html
 <div id="captcha"></div>
@@ -136,7 +136,7 @@ initYoTest({
 
 * 隐藏式，设置 product: "bind" 时生效，同时需要在onReady之后自行调用 [verify](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeverify) 方法进行展现
 
-![float](./images/bind.gif)
+![bind](./images/bind.gif)
 
 ```html
 <script>
@@ -157,7 +157,7 @@ initYoTest({
 
 * 自定义式，设置 product: "custom" 时生效，同时需要设置 [area](https://github.com/YoTest-team/YoTest-Web-SDK#inityotestoption-callback) 参数
 
-![float](./images/custom.gif)
+![custom](./images/custom.gif)
 
 ```html
 <div id="captcha"></div>
@@ -310,7 +310,7 @@ initYoTest({
 #### Captcha.prototype.verify()
 - `return`: this
 
-当 product: "bind" 是，调用此API可以呼出验证界面并要求验证。这种方式提供了更好的灵活性，方便开发者在不破坏原由功能和UI的情况下进行集成。但需要注意的是，请在onReady后进行调用，同时 verify 不需要和 appendTo 方法一同使用。
+当 product: "bind" 时，调用此API可以呼出验证界面并要求验证。这种方式提供了更好的灵活性，方便开发者在不破坏原由功能和UI的情况下进行集成。但需要注意的是，请在onReady后进行调用，同时 verify 不需要和 appendTo 方法一同使用。
 
 ```html
 <button id="checkcode">获取验证码</button>
