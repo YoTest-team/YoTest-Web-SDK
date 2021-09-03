@@ -224,7 +224,7 @@ class Captcha {
   }
 }
 
-module.exports = ({ accessId, product = "float", area, bgColor, enforced }, callback) => {
+export default ({ accessId, product = "float", area, bgColor, enforced }, callback) => {
   const captcha = new Captcha({ accessId, product, area, bgColor, enforced });
   if (typeof callback === "function") {
     callback(captcha);

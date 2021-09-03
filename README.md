@@ -34,7 +34,7 @@ YoTest-Web-SDK 文档
 或者你可以在HTML文件中引用CDN路径
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/yotest-web-sdk@1.0.4/dist/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/yotest-web-sdk@1.0.5/dist/index.min.js"></script>
 ```
 ### 快速开始
 
@@ -82,7 +82,7 @@ initYoTest({
   <body>
     <div id="captcha"></div>
     <script>
-      initYoTest({
+      initYoTest.default({
         accessId: "当前项目所属的accessId，可以在后台中进行获取及查看",
       }, (captcha) => {
         if(captcha != null) {
@@ -104,7 +104,7 @@ initYoTest({
 <div id="captcha"></div>
 ...
 <script>
-  initYoTest({
+  initYoTest.default({
     accessId: "your accessId",
     product: "float",
   }, (captcha) => {
@@ -123,7 +123,7 @@ initYoTest({
 <div id="captcha"></div>
 ...
 <script>
-  initYoTest({
+  initYoTest.default({
     accessId: "your accessId",
     product: "popup",
   }, (captcha) => {
@@ -140,7 +140,7 @@ initYoTest({
 
 ```html
 <script>
-  initYoTest({
+  initYoTest.default({
     accessId: "your accessId",
     product: "float",
   }, (captcha) => {
@@ -163,7 +163,7 @@ initYoTest({
 <div id="captcha"></div>
 ...
 <script>
-  initYoTest({
+  initYoTest.default({
     accessId: "your accessId",
     product: "custom",
     area: "#form"
@@ -215,7 +215,7 @@ Captcha实例方法
 初始化 `YoTest` ，传入相关的 `option` 参数，在 `callback` 中将会得到 `YoTest` 的对应实例。
 
 ```javascript
-initYoTest({
+initYoTest.default({
   accessId: "<your project accessId>",
   product: "custom",
   area: "#container",
@@ -236,7 +236,7 @@ initYoTest({
 <div id="captcha"></div>
 ...
 <script>
-  initYoTest({
+  initYoTest.default({
     accessId: "your accessId"
   }, (captcha) => {
     if(captcha){
@@ -258,7 +258,7 @@ initYoTest({
 <div id="captcha"></div>
 ...
 <script>
-  initYoTest({
+  initYoTest.default({
     accessId: "your accessId",
   }, (captcha) => {
     if(!captcha){
@@ -288,7 +288,7 @@ initYoTest({
 ...
 
 <script>
-  initYoTest({
+  initYoTest.default({
     accessId: "your accessId",
   }, (captcha) => {
     if(!captcha) {
@@ -316,7 +316,7 @@ initYoTest({
 <button id="checkcode">获取验证码</button>
 ...
 <script>
-  initYoTest({
+  initYoTest.default({
     accessId: "your accessId",
   }, (captcha) => {
     if(!captcha) {
@@ -343,7 +343,7 @@ initYoTest({
 <div id="captcha"></div>
 ...
 <script>
-  initYoTest({
+  initYoTest.default({
     accessId: "your accessId",
   }, (captcha) => {
     if(!captcha) {
@@ -371,7 +371,7 @@ initYoTest({
 <div id="captcha"></div>
 ...
 <script>
-  initYoTest({
+  initYoTest.default({
     accessId: "your accessId",
   }, (captcha) => {
     if(!captcha) {
@@ -399,7 +399,7 @@ initYoTest({
 <div id="captcha"></div>
 ...
 <script>
-  initYoTest({
+  initYoTest.default({
     accessId: "your accessId",
   }, (captcha) => {
     if(!captcha) {
@@ -424,7 +424,7 @@ initYoTest({
 <div id="captcha"></div>
 ...
 <script>
-  initYoTest({
+  initYoTest.default({
     accessId: "your accessId",
   }, (captcha) => {
     if(!captcha) {
@@ -448,7 +448,7 @@ initYoTest({
 <div id="captcha"></div>
 ...
 <script>
-  initYoTest({
+  initYoTest.default({
     accessId: "your accessId",
   }, (captcha) => {
     if(!captcha) {
