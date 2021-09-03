@@ -29,5 +29,5 @@ declare module "yotest-web-sdk" {
     destroy(): void;
   }
 
-  export function initYoTest(option: Option, callback: (captcha: Captcha | null) => void): Captcha | void;
+  export default function initYoTest(option: Option, callback: (captcha: Captcha | null) => void): Captcha | void;
 }
