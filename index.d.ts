@@ -1,24 +1,24 @@
 declare module "yotest-web-sdk" {
   type Option = {
-    accessId: String;
-    product?: "float" | "popup" | "bind" | "custom";
-    area?: String;
-    bgColor?: String;
-    enforced?: Boolean;
+    accessId: string;
+    product?: "float" | "popup" | "bind" | "custom" | string;
+    area?: string;
+    bgColor?: string;
+    enforced?: boolean;
   };
 
   export type ValidateResult = {
-    token: String | null;
-    verified: Boolean;
+    token: string | null;
+    verified: boolean;
   };
 
   export type ValidateError = {
-    code: Number;
-    message: String;
+    code: number;
+    message: string;
   };
 
   export interface Captcha {
-    appendTo(selector: String): this;
+    appendTo(selector: string): this;
     getValidate(): ValidateResult;
     reset(): this;
     verify(): this;

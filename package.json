@@ -1,6 +1,6 @@
 {
   "name": "yotest-web-sdk",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "YoTest Web SDK",
   "main": "index.js",
   "scripts": {
