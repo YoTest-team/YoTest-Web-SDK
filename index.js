@@ -45,8 +45,9 @@ function loadScript(src, callback) {
 }
 
 class Captcha {
-  constructor({ accessId, product, area, bgColor, enforced = false }) {
+  constructor({ platform, accessId, product, area, bgColor, enforced = false }) {
     this.captcha = null;
+    this.platform = platform;
     this.accessId = accessId;
     this.product = product;
     this.area = area;
@@ -75,7 +76,7 @@ class Captcha {
             if (YoTest != null) {
               YoTest({
                 accessId: this.accessId,
-                platform: "web",
+                platform: this.platform || "web",
                 product: this.product,
                 area: this.area,
                 bgColor: this.bgColor,
@@ -224,8 +225,8 @@ class Captcha {
   }
 }
 
-export default ({ accessId, product = "float", area, bgColor, enforced }, callback) => {
-  const captcha = new Captcha({ accessId, product, area, bgColor, enforced });
+export default ({ platform = "web", accessId, product = "float", area, bgColor, enforced }, callback) => {
+  const captcha = new Captcha({ platform, accessId, product, area, bgColor, enforced });
   if (typeof callback === "function") {
     callback(captcha);
   }
