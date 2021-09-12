@@ -215,7 +215,7 @@ class Captcha {
     $text.style.display = "flex";
     $text.style.justifyContent = "center";
     $text.style.alignItems = "center";
-    $text.innerHTML = "优验组件初始化中";
+    $text.innerHTML = "友验组件初始化中";
 
     $container.innerHTML = "";
     $init.appendChild($text);
