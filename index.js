@@ -49,12 +49,16 @@ function loadScript(src, callback) {
     let response = [];
     return caches
       .match(request)
-      .catch(() => {
-        return fetch(request);
-      })
       .then((resp) => {
-        response.push(resp);
-        return resp.clone();
+        if (resp == null) {
+          return fetch(request).then((resp) => {
+            response.push(resp);
+            return resp.clone();
+          });
+        } else {
+          response.push(resp);
+          return resp.clone();
+        }
       })
       .then((resp) => {
         response.push(resp);

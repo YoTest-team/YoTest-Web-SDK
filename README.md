@@ -34,7 +34,7 @@ YoTest-Web-SDK 文档
 或者你可以在HTML文件中引用CDN路径
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/yotest-web-sdk@1.1.1/dist/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/yotest-web-sdk@1.1.2/dist/index.min.js"></script>
 ```
 ### 快速开始
 
