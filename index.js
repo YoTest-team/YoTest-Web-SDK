@@ -32,16 +32,48 @@ function getInitData(callback) {
 }
 
 function loadScript(src, callback) {
-  let script = document.createElement("script");
-  script.onload = script.error = () => {
-    document.body.removeChild(script);
-    script = null;
-    callback(YoTest);
+  const loadAsync = () => {
+    let script = document.createElement("script");
+    script.onload = script.error = () => {
+      document.body.removeChild(script);
+      script = null;
+      callback(YoTest);
+    };
+
+    script.src = src;
+    document.body.appendChild(script);
   };
 
-  script.src = src;
-  script.async = "async";
-  document.body.appendChild(script);
+  if (window.fetch && window.Request && window.caches && caches.open && caches.match) {
+    const request = new Request(src);
+    let response = [];
+    return caches
+      .match(request)
+      .catch(() => {
+        return fetch(request);
+      })
+      .then((resp) => {
+        response.push(resp);
+        return resp.clone();
+      })
+      .then((resp) => {
+        response.push(resp);
+        return caches.open("__YOTEST_ASSETS__");
+      })
+      .then((cache) => {
+        return cache.put(request, response[0]);
+      })
+      .then(() => {
+        return response[1].text();
+      })
+      .then((text) => {
+        Function(text).call(window);
+        callback(YoTest);
+      })
+      .catch(loadAsync);
+  }
+
+  loadAsync();
 }
 
 class Captcha {
@@ -74,26 +106,30 @@ class Captcha {
         if (code === 200) {
           loadScript(data.lib, (YoTest) => {
             if (YoTest != null) {
-              YoTest({
-                accessId: this.accessId,
-                platform: this.platform || "web",
-                product: this.product,
-                area: this.area,
-                bgColor: this.bgColor,
-                enforced: this.enforced,
-              }, data, (captcha) => {
-                this.captcha = captcha;
-                this.captcha.onReady(this.onready);
-                this.captcha.onSuccess(this.onsuccess);
-                this.captcha.onError(this.onerror);
-                this.captcha.onClose(this.onclose);
-                this.captcha.appendTo(id);
-              });
+              YoTest(
+                {
+                  accessId: this.accessId,
+                  platform: this.platform || "web",
+                  product: this.product,
+                  area: this.area,
+                  bgColor: this.bgColor,
+                  enforced: this.enforced,
+                },
+                data,
+                (captcha) => {
+                  this.captcha = captcha;
+                  this.captcha.onReady(this.onready);
+                  this.captcha.onSuccess(this.onsuccess);
+                  this.captcha.onError(this.onerror);
+                  this.captcha.onClose(this.onclose);
+                  this.captcha.appendTo(id);
+                }
+              );
             }
           });
         }
       }
-    })
+    });
 
     return this;
   }
