@@ -1,5 +1,7 @@
 import { openDB } from "idb";
 const indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
+const supportCache = window.Promise && window.fetch && window.Request && window.caches && caches.open && caches.match;
+const supportIndexedDB = window.Promise && window.fetch && !!indexedDB;
 const match = navigator.userAgent.match(/msie\s+(\d+?).\d/i);
 let isOldIE = false;
 if (match != null) {
@@ -61,7 +63,6 @@ function getFromIndexedDB(src, loadAsync, callback) {
   let object = null;
   return promise
     .then((db) => {
-      console.time("x");
       database = db;
       transaction = db.transaction("Assets", "readwrite");
       index = transaction.store.index("URLIndex");
@@ -90,7 +91,6 @@ function getFromIndexedDB(src, loadAsync, callback) {
       loadAsync();
     })
     .then(() => {
-      console.timeEnd("x");
       return transaction && transaction.done;
     });
 }
@@ -132,9 +132,9 @@ function loadScript(src, callback) {
     document.body.appendChild(script);
   };
 
-  if (window.fetch && window.Request && window.caches && caches.open && caches.match) {
+  if (supportCache) {
     getFromCacheStorage(src, loadAsync, callback);
-  } else if (window.fetch && !!indexedDB) {
+  } else if (supportIndexedDB) {
     getFromIndexedDB(src, loadAsync, callback);
   } else {
     loadAsync();
