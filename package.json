@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/YoTest-team/YoTest-Web-SDK/issues"
   },
-  "homepage": "https://github.com/YoTest-team/YoTest-Web-SDK#readme"
+  "homepage": "https://github.com/YoTest-team/YoTest-Web-SDK#readme",
+  "dependencies": {
+    "idb": "^6.1.4"
+  }
 }

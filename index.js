@@ -1,3 +1,5 @@
+import { openDB } from "idb";
+const indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
 const match = navigator.userAgent.match(/msie\s+(\d+?).\d/i);
 let isOldIE = false;
 if (match != null) {
@@ -5,6 +7,92 @@ if (match != null) {
   if (version < 10) {
     isOldIE = true;
   }
+}
+
+function getFromCacheStorage(src, loadAsync, callback) {
+  const request = new Request(src);
+  let response = [];
+  return caches
+    .match(request)
+    .then((resp) => {
+      if (resp == null) {
+        return fetch(request).then((resp) => {
+          response.push(resp);
+          return resp.clone();
+        });
+      } else {
+        response.push(resp);
+        return resp.clone();
+      }
+    })
+    .then((resp) => {
+      response.push(resp);
+      return caches.open("__YOTEST_ASSETS__");
+    })
+    .then((cache) => {
+      return cache.put(request, response[0]);
+    })
+    .then(() => {
+      return response[1].text();
+    })
+    .then((text) => {
+      Function(text).call(window);
+      callback(YoTest);
+    })
+    .catch(() => {
+      loadAsync();
+    });
+}
+
+function getFromIndexedDB(src, loadAsync, callback) {
+  const promise = openDB("__YOTEST_ASSETS__", 1, {
+    upgrade(db) {
+      const store = db.createObjectStore("Assets", {
+        keyPath: "id",
+        autoIncrement: true,
+      });
+      store.createIndex("URLIndex", ["url"]);
+    },
+  });
+
+  let database = null;
+  let transaction = null;
+  let index = null;
+  let object = null;
+  return promise
+    .then((db) => {
+      console.time("x");
+      database = db;
+      transaction = db.transaction("Assets", "readwrite");
+      index = transaction.store.index("URLIndex");
+      return index.get([src]);
+    })
+    .then((data) => {
+      object = data;
+      return transaction.done;
+    })
+    .then(() => {
+      if (object == null) {
+        return fetch(src).then((response) => response.text());
+      }
+    })
+    .then((text) => {
+      if (object == null) {
+        transaction = database.transaction("Assets", "readwrite");
+        return transaction.store.add({ url: src, text }).then(() => text);
+      }
+    })
+    .then(() => {
+      Function(object.text).call(window);
+      callback(YoTest);
+    })
+    .catch(() => {
+      loadAsync();
+    })
+    .then(() => {
+      console.timeEnd("x");
+      return transaction && transaction.done;
+    });
 }
 
 function getInitData(callback) {
@@ -45,39 +133,12 @@ function loadScript(src, callback) {
   };
 
   if (window.fetch && window.Request && window.caches && caches.open && caches.match) {
-    const request = new Request(src);
-    let response = [];
-    return caches
-      .match(request)
-      .then((resp) => {
-        if (resp == null) {
-          return fetch(request).then((resp) => {
-            response.push(resp);
-            return resp.clone();
-          });
-        } else {
-          response.push(resp);
-          return resp.clone();
-        }
-      })
-      .then((resp) => {
-        response.push(resp);
-        return caches.open("__YOTEST_ASSETS__");
-      })
-      .then((cache) => {
-        return cache.put(request, response[0]);
-      })
-      .then(() => {
-        return response[1].text();
-      })
-      .then((text) => {
-        Function(text).call(window);
-        callback(YoTest);
-      })
-      .catch(loadAsync);
+    getFromCacheStorage(src, loadAsync, callback);
+  } else if (window.fetch && !!indexedDB) {
+    getFromIndexedDB(src, loadAsync, callback);
+  } else {
+    loadAsync();
   }
-
-  loadAsync();
 }
 
 class Captcha {
