@@ -1,7 +1,6 @@
-import { openDB } from "idb";
 const indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
-const supportCache = window.Promise && window.fetch && window.Request && window.caches && caches.open && caches.match;
-const supportIndexedDB = window.Promise && window.fetch && !!indexedDB;
+const supportCacheStorage = window.Promise && window.fetch && window.Request && window.caches && caches.open && caches.match;
+const supportIndexedDB = window.WeakMap && window.Map && window.Promise && window.Promise.all && window.fetch && !!indexedDB;
 const match = navigator.userAgent.match(/msie\s+(\d+?).\d/i);
 let isOldIE = false;
 if (match != null) {
@@ -47,6 +46,7 @@ function getFromCacheStorage(src, loadAsync, callback) {
 }
 
 function getFromIndexedDB(src, loadAsync, callback) {
+  const { openDB } = require("idb");
   const promise = openDB("__YOTEST_ASSETS__", 1, {
     upgrade(db) {
       const store = db.createObjectStore("Assets", {
@@ -132,7 +132,7 @@ function loadScript(src, callback) {
     document.body.appendChild(script);
   };
 
-  if (supportCache) {
+  if (supportCacheStorage) {
     getFromCacheStorage(src, loadAsync, callback);
   } else if (supportIndexedDB) {
     getFromIndexedDB(src, loadAsync, callback);
