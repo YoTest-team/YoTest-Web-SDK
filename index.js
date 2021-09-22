@@ -52,7 +52,7 @@ function getFromIndexedDB(src, loadAsync, callback) {
       open.onupgradeneeded = () => {
         const db = open.result;
         const store = db.createObjectStore("AssetsStore", { keyPath: "id", autoIncrement: true });
-        store.createIndex("URLIndex", ["url"]);
+        store.createIndex("URLIndex", "url");
       };
     });
   };
@@ -69,7 +69,7 @@ function getFromIndexedDB(src, loadAsync, callback) {
       store = transaction.objectStore("AssetsStore");
       index = store.index("URLIndex");
       return new Promise((resolve, reject) => {
-        const assets = index.get([src]);
+        const assets = index.get(src);
         assets.onsuccess = () => resolve(assets.result);
         assets.onerror = (event) => reject(event);
       });
