@@ -1,6 +1,6 @@
 const indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
 const supportCacheStorage = window.Promise && window.fetch && window.Request && window.caches && caches.open && caches.match;
-const supportIndexedDB = window.WeakMap && window.Map && window.Promise && window.Promise.all && window.fetch && !!indexedDB;
+const supportIndexedDB = window.Promise && !!indexedDB;
 const match = navigator.userAgent.match(/msie\s+(\d+?).\d/i);
 let isOldIE = false;
 if (match != null) {
@@ -40,59 +40,68 @@ function getFromCacheStorage(src, loadAsync, callback) {
       Function(text).call(window);
       callback(YoTest);
     })
-    .catch(() => {
-      loadAsync();
-    });
+    .catch(() => loadAsync());
 }
 
 function getFromIndexedDB(src, loadAsync, callback) {
-  const { openDB } = require("idb");
-  const promise = openDB("__YOTEST_ASSETS__", 1, {
-    upgrade(db) {
-      const store = db.createObjectStore("Assets", {
-        keyPath: "id",
-        autoIncrement: true,
-      });
-      store.createIndex("URLIndex", ["url"]);
-    },
-  });
+  const openDB = function () {
+    return new Promise((resolve, reject) => {
+      const open = indexedDB.open("__YOTEST_ASSETS__", 1);
+      open.onsuccess = () => resolve(open.result);
+      open.onerror = (event) => reject(event);
+      open.onupgradeneeded = () => {
+        const db = open.result;
+        const store = db.createObjectStore("AssetsStore", { keyPath: "id", autoIncrement: true });
+        store.createIndex("URLIndex", ["url"]);
+      };
+    });
+  };
 
   let database = null;
   let transaction = null;
+  let store = null;
   let index = null;
   let object = null;
-  return promise
+  return openDB()
     .then((db) => {
       database = db;
-      transaction = db.transaction("Assets", "readwrite");
-      index = transaction.store.index("URLIndex");
-      return index.get([src]);
+      transaction = database.transaction("AssetsStore", "readwrite");
+      store = transaction.objectStore("AssetsStore");
+      index = store.index("URLIndex");
+      return new Promise((resolve, reject) => {
+        const assets = index.get([src]);
+        assets.onsuccess = () => resolve(assets.result);
+        assets.onerror = (event) => reject(event);
+      });
     })
     .then((data) => {
       object = data;
-      return transaction.done;
-    })
-    .then(() => {
-      if (object == null) {
-        return fetch(src).then((response) => response.text());
+      if (data == null) {
+        return new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open("get", src);
+          xhr.onload = () => resolve(xhr.response || xhr.responseText);
+          xhr.onerror = () => reject(new Error(xhr.status || xhr.readyState));
+          xhr.send(null);
+        });
       }
     })
     .then((text) => {
       if (object == null) {
-        transaction = database.transaction("Assets", "readwrite");
-        return transaction.store.add({ url: src, text }).then(() => text);
+        transaction = database.transaction("AssetsStore", "readwrite");
+        store = transaction.objectStore("AssetsStore");
+        store.put({ url: src, text });
+        return text;
+      } else {
+        return object.text;
       }
     })
-    .then(() => {
-      Function(object.text).call(window);
+    .then((text) => {
+      Function(text).call(window);
       callback(YoTest);
     })
-    .catch(() => {
-      loadAsync();
-    })
-    .then(() => {
-      return transaction && transaction.done;
-    });
+    .catch(() => loadAsync())
+    .then(() => database && database.close());
 }
 
 function getInitData(callback) {
@@ -104,7 +113,6 @@ function getInitData(callback) {
     try {
       response = JSON.parse(response);
     } catch {
-      // nothing to do...
     } finally {
       if (typeof callback === "function") {
         callback(null, response);
