@@ -142,7 +142,7 @@ initYoTest({
 <script>
   initYoTest.default({
     accessId: "your accessId",
-    product: "float",
+    product: "bind",
   }, (captcha) => {
     if(captcha) {
       captcha.onReady(() => {
