@@ -34,7 +34,7 @@ YoTest-Web-SDK 文档
 或者你可以在HTML文件中引用CDN路径
 
 ```html
-<script src="//static.fastyotest.com/assets/yotest.4500b55.js"></script>
+<script src="//static.fastyotest.com/assets/yotest.3b35648f.js"></script>
 ```
 ### 快速开始
 
@@ -192,6 +192,8 @@ Captcha实例方法
 * [verify()](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeverify)
 
 * [onReady(callback)](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeonreadycallback)
+
+* [onShow(callback)](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeonshowcallback)
 
 * [onSuccess(callback)](https://github.com/YoTest-team/YoTest-Web-SDK#captchaprototypeonsuccesscallback)
 
@@ -353,6 +355,31 @@ initYoTest.default({
     captcha.appendTo("#captcha");
     captcha.onReady(()=>{
       console.log("yotest init completed...");
+    });
+  });
+</script>
+```
+
+#### Captcha.prototype.onShow(callback)
+- callback \<Function\> 验证弹框展现的回调函数，无参数
+- `return`: this
+
+监听验证框展现的事件。
+
+```html
+<div id="captcha"></div>
+...
+<script>
+  initYoTest.default({
+    accessId: "your accessId",
+  }, (captcha) => {
+    if(!captcha) {
+      return;
+    }
+
+    captcha.appendTo("#captcha");
+    captcha.onShow(()=>{
+      console.log("yotest showed...");
     });
   });
 </script>

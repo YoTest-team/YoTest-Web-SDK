@@ -159,6 +159,7 @@ class Captcha {
     this.bgColor = bgColor;
     this.enforced = enforced;
     this.onready = null;
+    this.onshow = null;
     this.onsuccess = null;
     this.onerror = null;
     this.onclose = null;
@@ -192,6 +193,7 @@ class Captcha {
                 (captcha) => {
                   this.captcha = captcha;
                   this.captcha.onReady(this.onready);
+                  this.captcha.onShow(this.onshow);
                   this.captcha.onSuccess(this.onsuccess);
                   this.captcha.onError(this.onerror);
                   this.captcha.onClose(this.onclose);
@@ -232,6 +234,14 @@ class Captcha {
     this.onready = callback;
     if (this.captcha) {
       this.captcha.onReady(callback);
+    }
+    return this;
+  }
+
+  onShow(callback) {
+    this.onshow = callback;
+    if (this.captcha) {
+      this.captcha.onShow(callback);
     }
     return this;
   }
