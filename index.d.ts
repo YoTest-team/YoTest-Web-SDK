@@ -23,6 +23,7 @@ declare module "yotest-web-sdk" {
     reset(): this;
     verify(): this;
     onReady(callback: () => void): this;
+    onShow(callback: () => void): this;
     onSuccess(callback: (result: ValidateResult) => void): this;
     onError(callback: (error: ValidateError) => void): this;
     onClose(callback: () => void): this;
