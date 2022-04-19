@@ -34,7 +34,7 @@ YoTest-Web-SDK 文档
 或者你可以在HTML文件中引用CDN路径
 
 ```html
-<script src="//static.fastyotest.com/assets/yotest.3b35648f.js"></script>
+<script src="//static.fastyotest.com/assets/yotest.180d0a5.js"></script>
 ```
 ### 快速开始
 

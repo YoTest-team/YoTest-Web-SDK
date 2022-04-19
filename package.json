@@ -17,9 +17,9 @@
   },
   "homepage": "https://github.com/YoTest-team/YoTest-Web-SDK#readme",
   "devDependencies": {
-    "@babel/core": "^7.14.6",
-    "@babel/plugin-transform-runtime": "^7.14.5",
-    "@babel/preset-env": "^7.14.7"
+    "@babel/core": "^7.17.9",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11"
   },
   "browserslist": [
     "> 1%",
