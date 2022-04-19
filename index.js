@@ -284,7 +284,8 @@ class Captcha {
     }
 
     const bounding = $container.getBoundingClientRect();
-    const em = (bounding.width / 300) * 16;
+    let em = (bounding.width / 300) * 16;
+    em = em > 16 ? 16 : em;
 
     const $wrapper = document.createElement("div");
     $wrapper.style.width = "100%";
@@ -302,7 +303,7 @@ class Captcha {
     }
 
     const $init = document.createElement("div");
-    $init.style.width = 18.625 * em + "px";
+    $init.style.width = "100%";
     $init.style.height = 2.375 * em + "px";
     $init.style.position = "absolute";
     $init.style.top = "50%";
